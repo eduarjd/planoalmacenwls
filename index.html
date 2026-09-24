@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Plano Almacén Wire Loggs Services</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+  <div class="toolbar">
+    <strong>Plano Almacén WLS:</strong>
+    <button class="btn-save" onclick="saveChanges()">💾 Guardar</button>
+    <button class="btn-undo" id="btn-undo" onclick="undoAction()" disabled>↩️ Deshacer</button>
+    <button class="btn-reset" onclick="resetCanvas()">🔄 Restaurar</button>
+    <button class="btn-download" onclick="downloadFile()">⬇️ Descargar HTML</button>
+    <button onclick="addWall()">+ Pared</button>
+    <button onclick="addDoor()">+ Puerta</button>
+    <button onclick="addWindow()">+ Ventana</button>
+    <button onclick="addPC()">+ PC</button>
+    <button onclick="addShelf()">+ Estante</button>
+    <button onclick="addPallet()" style="background: #d97706;">+ Estiba</button>
+    <button onclick="addGenericBox()">+ Objeto</button>
+    <button onclick="addCustomText()">+ Texto</button>
+    <button onclick="addSignNoSmoking()" style="background: #dc2626;">🚫 No Fumar</button>
+    <button onclick="addSignDanger()" style="background: #ca8a04;">⚠️ Peligro</button>
+    <button onclick="addSignFireExtinguisher()" style="background: #ef4444;">🧯 Extintor</button>
+    <button onclick="addSignElectrical()" style="background: #eab308; color: #000;">⚡ Riesgo Eléctrico</button>
+    <button onclick="addSignExit()" style="background: #16a34a;">🚪 Salida Emergencia</button>
+    <button onclick="addSignPPE()" style="background: #2563eb;">🦺 Uso de EPP</button>
+    <button onclick="openHistoryModal()" style="background: #8b5cf6; color: #fff;">📋 Ver Historial</button>
+    <button id="btn-copy" onclick="copySelected()" disabled>📋 Copiar</button>
+    <button id="btn-paste" onclick="pasteElement()" disabled>📄 Pegar</button>
+  </div>
+
+  <div class="main-workspace">
+    <div class="blueprint-wrapper">
+      <div class="blueprint-container">
+        <svg id="canvas" width="100%" height="420" viewBox="0 0 1400 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <g id="selection-box-layer"></g>
+          <g id="interactive-layer">
+            <g class="draggable wall-item" transform="translate(60, 60) rotate(0, 637, 282.5)" data-w="1274" data-h="565" data-text="Pared Perimetral" data-fontsize="12">
+              <rect x="0" y="0" width="1274" height="565" fill="#ffffff" stroke="#1e293b" stroke-width="12" />
+            </g>
+
+            <g class="draggable wall-item" transform="translate(60, 60) rotate(0, 150, 6)" data-w="300" data-h="12" data-text="Muro Superior Izq" data-fontsize="10">
+              <rect x="0" y="0" width="300" height="12" fill="#1e293b" stroke="#1e293b" stroke-width="1" />
+            </g>
+            <g class="draggable wall-item" transform="translate(1078, 60) rotate(0, 128, 6)" data-w="256" data-h="12" data-text="Muro Superior Der" data-fontsize="10">
+              <rect x="0" y="0" width="256" height="12" fill="#1e293b" stroke="#1e293b" stroke-width="1" />
+            </g>
+            
+            <g class="draggable wall-item" transform="translate(1078, 60) rotate(0, 4, 35)" data-w="8" data-h="70" data-text="Tabique Cuarto 1" data-fontsize="10">
+              <rect x="0" y="0" width="8" height="70" fill="#1e293b" stroke="#1e293b" stroke-width="1" />
+            </g>
+            <g class="draggable wall-item" transform="translate(1078, 230) rotate(0, 4, 42.5)" data-w="8" data-h="85" data-text="Tabique Cuarto 2" data-fontsize="10">
+              <rect x="0" y="0" width="8" height="85" fill="#1e293b" stroke="#1e293b" stroke-width="1" />
+            </g>
+            <g class="draggable wall-item" transform="translate(1078, 315) rotate(0, 128, 4)" data-w="256" data-h="8" data-text="Tabique Cuarto 3" data-fontsize="10">
+              <rect x="0" y="0" width="256" height="8" fill="#1e293b" stroke="#1e293b" stroke-width="1" />
+            </g>
+
+            <g class="draggable window-item" transform="translate(620, 54) rotate(0, 127, 6)" data-w="254" data-h="12" data-text="Ventana Frontal" data-fontsize="10">
+              <rect x="0" y="0" width="254" height="12" fill="#bae6fd" stroke="#0284c7" stroke-width="2" rx="2" />
+            </g>
+
+            <g class="draggable pc-station" transform="translate(1110, 75) rotate(0, 50, 40)" data-w="100" data-h="80" data-text="PC Recepción" data-fontsize="9">
+              <rect class="pc-desk" x="0" y="0" width="100" height="70" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" rx="4" />
+              <rect class="pc-monitor" x="25" y="8" width="50" height="28" fill="#0f172a" rx="2" stroke="#64748b" stroke-width="1.5" />
+              <rect class="pc-stand" x="42" y="36" width="16" height="4" fill="#64748b" />
+              <circle class="pc-led" cx="50" cy="22" r="1" fill="#2563eb" />
+              <rect class="pc-keyboard" x="35" y="46" width="30" height="10" fill="#cbd5e1" rx="1" />
+              <ellipse class="pc-mouse" cx="72" cy="51" rx="4" ry="5" fill="#cbd5e1" />
+              <path class="pc-chair" d="M 35 70 C 35 62, 65 62, 65 70 L 68 85 C 68 88, 32 88, 32 85 Z" fill="#cbd5e1" stroke="#1e293b" stroke-width="1.5" opacity="0.9" />
+              <text class="pc-label" x="50" y="35" font-size="9" fill="#1e293b" font-weight="bold" text-anchor="middle" dominant-baseline="central">PC Recepción</text>
+            </g>
+
+            <g class="draggable pc-station" transform="translate(1210, 415) rotate(0, 50, 40)" data-w="100" data-h="80" data-text="PC Almacén" data-fontsize="9">
+              <rect class="pc-desk" x="0" y="0" width="100" height="70" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" rx="4" />
+              <rect class="pc-monitor" x="25" y="8" width="50" height="28" fill="#0f172a" rx="2" stroke="#64748b" stroke-width="1.5" />
+              <rect class="pc-stand" x="42" y="36" width="16" height="4" fill="#64748b" />
+              <circle class="pc-led" cx="50" cy="22" r="1" fill="#2563eb" />
+              <rect class="pc-keyboard" x="35" y="46" width="30" height="10" fill="#cbd5e1" rx="1" />
+              <ellipse class="pc-mouse" cx="72" cy="51" rx="4" ry="5" fill="#cbd5e1" />
+              <path class="pc-chair" d="M 35 70 C 35 62, 65 62, 65 70 L 68 85 C 68 88, 32 88, 32 85 Z" fill="#cbd5e1" stroke="#1e293b" stroke-width="1.5" opacity="0.9" />
+              <text class="pc-label" x="50" y="35" font-size="9" fill="#1e293b" font-weight="bold" text-anchor="middle" dominant-baseline="central">PC Almacén</text>
+            </g>
+
+            <g class="draggable shelf-item" transform="translate(66, 565) rotate(0, 45, 27)" data-w="90" data-h="54" data-text="E1" data-fontsize="12" data-comp='["","","","",""]' data-tech='[[],[],[],[],[]]'>
+              <text class="shelf-label" x="45" y="-5" font-size="12" fill="#000000" font-weight="bold" text-anchor="middle">E1</text>
+              <rect x="0" y="0" width="90" height="54" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" />
+              <g class="shelf-compartments" transform="translate(0, 0)"></g>
+            </g>
+            <g class="draggable shelf-item" transform="translate(156, 565) rotate(0, 45, 27)" data-w="90" data-h="54" data-text="E2" data-fontsize="12" data-comp='["","","","",""]' data-tech='[[],[],[],[],[]]'>
+              <text class="shelf-label" x="45" y="-5" font-size="12" fill="#000000" font-weight="bold" text-anchor="middle">E2</text>
+              <rect x="0" y="0" width="90" height="54" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" />
+              <g class="shelf-compartments" transform="translate(0, 0)"></g>
+            </g>
+            <g class="draggable shelf-item" transform="translate(246, 565) rotate(0, 45, 27)" data-w="90" data-h="54" data-text="E3" data-fontsize="12" data-comp='["","","","",""]' data-tech='[[],[],[],[],[]]'>
+              <text class="shelf-label" x="45" y="-5" font-size="12" fill="#000000" font-weight="bold" text-anchor="middle">E3</text>
+              <rect x="0" y="0" width="90" height="54" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" />
+              <g class="shelf-compartments" transform="translate(0, 0)"></g>
+            </g>
+            <g class="draggable shelf-item" transform="translate(336, 565) rotate(0, 45, 27)" data-w="90" data-h="54" data-text="E4" data-fontsize="12" data-comp='["","","","",""]' data-tech='[[],[],[],[],[]]'>
+              <text class="shelf-label" x="45" y="-5" font-size="12" fill="#000000" font-weight="bold" text-anchor="middle">E4</text>
+              <rect x="0" y="0" width="90" height="54" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" />
+              <g class="shelf-compartments" transform="translate(0, 0)"></g>
+            </g>
+            <g class="draggable shelf-item" transform="translate(426, 565) rotate(0, 45, 27)" data-w="90" data-h="54" data-text="E5" data-fontsize="12" data-comp='["","","","",""]' data-tech='[[],[],[],[],[]]'>
+              <text class="shelf-label" x="45" y="-5" font-size="12" fill="#000000" font-weight="bold" text-anchor="middle">E5</text>
+              <rect x="0" y="0" width="90" height="54" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" />
+              <g class="shelf-compartments" transform="translate(0, 0)"></g>
+            </g>
+            <g class="draggable shelf-item" transform="translate(516, 565) rotate(0, 45, 27)" data-w="90" data-h="54" data-text="E6" data-fontsize="12" data-comp='["","","","",""]' data-tech='[[],[],[],[],[]]'>
+              <text class="shelf-label" x="45" y="-5" font-size="12" fill="#000000" font-weight="bold" text-anchor="middle">E6</text>
+              <rect x="0" y="0" width="90" height="54" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" />
+              <g class="shelf-compartments" transform="translate(0, 0)"></g>
+            </g>
+            <g class="draggable shelf-item" transform="translate(606, 565) rotate(0, 45, 27)" data-w="90" data-h="54" data-text="E7" data-fontsize="12" data-comp='["","","","",""]' data-tech='[[],[],[],[],[]]'>
+              <text class="shelf-label" x="45" y="-5" font-size="12" fill="#000000" font-weight="bold" text-anchor="middle">E7</text>
+              <rect x="0" y="0" width="90" height="54" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" />
+              <g class="shelf-compartments" transform="translate(0, 0)"></g>
+            </g>
+            <g class="draggable shelf-item" transform="translate(696, 565) rotate(0, 45, 27)" data-w="90" data-h="54" data-text="E8" data-fontsize="12" data-comp='["","","","",""]' data-tech='[[],[],[],[],[]]'>
+              <text class="shelf-label" x="45" y="-5" font-size="12" fill="#000000" font-weight="bold" text-anchor="middle">E8</text>
+              <rect x="0" y="0" width="90" height="54" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" />
+              <g class="shelf-compartments" transform="translate(0, 0)"></g>
+            </g>
+            <g class="draggable shelf-item" transform="translate(786, 565) rotate(0, 45, 27)" data-w="90" data-h="54" data-text="E9" data-fontsize="12" data-comp='["","","","",""]' data-tech='[[],[],[],[],[]]'>
+              <text class="shelf-label" x="45" y="-5" font-size="12" fill="#000000" font-weight="bold" text-anchor="middle">E9</text>
+              <rect x="0" y="0" width="90" height="54" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" />
+              <g class="shelf-compartments" transform="translate(0, 0)"></g>
+            </g>
+            <g class="draggable shelf-item" transform="translate(876, 565) rotate(0, 45, 27)" data-w="90" data-h="54" data-text="E10" data-fontsize="12" data-comp='["","","","",""]' data-tech='[[],[],[],[],[]]'>
+              <text class="shelf-label" x="45" y="-5" font-size="12" fill="#000000" font-weight="bold" text-anchor="middle">E10</text>
+              <rect x="0" y="0" width="90" height="54" fill="#e2e8f0" stroke="#2563eb" stroke-width="2" />
+              <g class="shelf-compartments" transform="translate(0, 0)"></g>
+            </g>
+
+            <g class="draggable-text" transform="translate(1206, 200)" data-text="Cuarto" data-fontsize="14"><text x="0" y="0" font-size="14" font-weight="bold" fill="#1e293b" text-anchor="middle">Cuarto</text></g>
+            <g class="draggable-text" transform="translate(1206, 220)" data-text="2.55m x 2.55m" data-fontsize="12"><text x="0" y="0" font-size="12" fill="#475569" text-anchor="middle">2.55m x 2.55m</text></g>
+          </g>
+        </svg>
+      </div>
+
+      <div id="tech-sheet-container">
+        <div id="tech-sheet-header" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; border-bottom: 2px solid #334155; padding-bottom: 8px; margin-bottom: 15px;">
+          <span style="font-size: 16px; font-weight: bold; color: #60a5fa; white-space: nowrap;">📋 Ficha Técnica:</span>
+          <input type="text" id="tech-shelf-title-input" placeholder="Nombre del estante..." oninput="updateTechTitle(this.value)" style="background: #0f172a; border: 1px solid #475569; color: #fff; font-size: 15px; font-weight: bold; padding: 4px 8px; border-radius: 4px; flex: 1; outline: none;" title="Editar título de la ficha técnica">
+        </div>
+
+        <div class="shelf-photo-section" style="margin-bottom: 15px; background: #0f172a; padding: 12px; border-radius: 6px; border: 1px solid #334155; display: flex; gap: 15px; align-items: center;">
+          <div id="shelf-photo-preview" style="width: 90px; height: 90px; background: #1e293b; border: 1px dashed #475569; border-radius: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;">
+            <span style="font-size: 10px; color: #94a3b8; text-align: center;">Sin foto</span>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 11px; color: #cbd5e0; font-weight: bold; margin: 0;">Foto del Estante:</label>
+            <input type="file" id="shelf-photo-input" accept="image/*" onchange="handleShelfPhotoUpload(this)" style="font-size: 11px; padding: 4px; background: #1e293b; color: #fff; border: 1px solid #475569; border-radius: 4px; width: 100%;">
+            <button onclick="removeShelfPhoto()" style="background: #dc2626; color: #fff; border: none; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer; align-self: flex-start;">🗑️ Quitar Foto</button>
+          </div>
+        </div>
+
+        <div id="tech-sheet-body" class="tech-grid"></div>
+      </div>
+    </div>
+
+    <div class="sidebar-panel">
+      <div id="search-panel">
+        <h4>🔍 Búsqueda General</h4>
+        <div class="search-box-container">
+          <input type="text" id="shelf-search-input" placeholder="Estante, Artículo, Código, Área..." oninput="searchShelf(this.value)">
+          <button onclick="clearSearch()">Limpiar</button>
+        </div>
+      </div>
+
+      <div id="inspector">
+        <h4>Propiedades</h4>
+        <div id="inspector-content">
+          <div class="no-selection">Selecciona cualquier objeto, pared o texto en el plano para editarlo.</div>
+        </div>
+      </div>
+
+      <div id="legend-panel">
+        <h4>Leyenda de Áreas</h4>
+        <div class="legend-item"><div class="legend-color" style="background: #dc2626;"></div><span>Soldadura</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #2563eb;"></div><span>Electromecánica</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #d97706;"></div><span>Consumibles</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #16a34a;"></div><span>Electricidad</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #ea580c;"></div><span>Plomería</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #0284c7;"></div><span>Limpieza</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #4e0218;"></div><span>Seguridad</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #9333ea;"></div><span>Herramientas</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #475569;"></div><span>Repuestos Automotrices</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #db2777;"></div><span>Guaya Fina</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #4f46e5;"></div><span>AYT</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #0d9488;"></div><span>Llaves Hidráulicas</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #f59e0b;"></div><span>Papelería</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #65a30d;"></div><span>Almacén</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #78350f;"></div><span>Repuestos Varios</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #f43f5e;"></div><span>Comida</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #64748b;"></div><span>Archivo</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Menú contextual personalizado con clic derecho -->
+<div id="context-menu" class="context-menu">
+  <div onclick="menuCopy()">📋 Copiar Selección</div>
+  <div onclick="menuPaste()">📄 Pegar</div>
+  <div class="menu-divider"></div>
+  <div class="menu-delete" onclick="menuDelete()">🗑️ Eliminar Elementos</div>
+</div>
+
+<!-- Modal para Registrar Salida de Inventario -->
+<div id="modal-outflow" class="outflow-modal-overlay" style="display: none;">
+  <div class="outflow-modal-card">
+    <h3 class="outflow-title">📦 Registrar Salida de Material</h3>
+    
+    <div style="margin-bottom: 12px;">
+      <span id="outflow-art-name" style="font-weight: bold; font-size: 14px; color: #38bdf8; display: block;"></span>
+      <span id="outflow-art-stock" style="font-size: 12px; color: #94a3b8;">Disponible actual: 0</span>
+    </div>
+
+    <label style="font-size: 12px; display: block; margin-bottom: 4px; font-weight: bold;">Cantidad a retirar:</label>
+    <input type="number" id="outflow-qty-input" min="1" placeholder="Ej. 2" class="outflow-input">
+
+    <label style="font-size: 12px; display: block; margin-bottom: 4px; font-weight: bold;">Motivo / Receptor / O.T. (Opcional):</label>
+    <input type="text" id="outflow-note-input" placeholder="Ej. Retirado para Mantenimiento OT-102" class="outflow-input">
+
+    <div style="display: flex; gap: 10px; margin-top: 15px;">
+      <button onclick="confirmOutflow()" style="flex: 1; background: #ea580c; color: #fff; border: none; padding: 10px; border-radius: 4px; font-weight: bold; cursor: pointer;">Confirmar Salida</button>
+      <button onclick="closeOutflowModal()" style="flex: 1; background: #475569; color: #fff; border: none; padding: 10px; border-radius: 4px; font-weight: bold; cursor: pointer;">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para ampliar la foto del estante -->
+<div id="photo-modal" onclick="closePhotoModal()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 2000; justify-content: center; align-items: center; cursor: pointer;">
+  <span style="position: absolute; top: 20px; right: 30px; color: #fff; font-size: 35px; font-weight: bold; cursor: pointer;">&times;</span>
+  <img id="modal-img" style="max-width: 90%; max-height: 90%; border-radius: 8px; box-shadow: 0 5px 25px rgba(0,0,0,0.5); object-fit: contain;" onclick="event.stopPropagation()">
+</div>
+
+<!-- Modal para Ver Historial de Salidas -->
+<div id="modal-history" class="outflow-modal-overlay" style="display: none;">
+  <div class="outflow-modal-card" style="max-width: 800px; width: 95%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 8px; margin-bottom: 12px;">
+      <h3 class="outflow-title" style="margin: 0; border: none; padding: 0;">📋 Historial de Salidas (Kárdex)</h3>
+      <button onclick="closeHistoryModal()" style="background: transparent; border: none; color: #94a3b8; font-size: 20px; cursor: pointer; font-weight: bold;">&times;</button>
+    </div>
+
+    <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+      <input type="text" id="history-filter-input" placeholder="Filtrar por código, artículo o estante..." oninput="renderHistoryTable()" class="outflow-input" style="margin-bottom: 0;">
+      <button onclick="exportHistoryCSV()" style="background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; white-space: nowrap; font-size: 12px;">📥 Exportar CSV</button>
+      <button onclick="clearHistory()" style="background: #dc2626; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; white-space: nowrap; font-size: 12px;">🗑️ Limpiar</button>
+    </div>
+
+    <div style="max-height: 380px; overflow-y: auto; border: 1px solid #334155; border-radius: 4px;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; color: #f8fafc;">
+        <thead>
+          <tr style="background: #0f172a; border-bottom: 1px solid #334155; position: sticky; top: 0; color: #38bdf8;">
+            <th style="padding: 8px;">Fecha / Hora</th>
+            <th style="padding: 8px;">Estante / Comp.</th>
+            <th style="padding: 8px;">Código</th>
+            <th style="padding: 8px;">Nombre / Artículo</th>
+            <th style="padding: 8px; text-align: center;">Retirado</th>
+            <th style="padding: 8px; text-align: center;">Restante</th>
+            <th style="padding: 8px;">Nota / O.T.</th>
+          </tr>
+        </thead>
+        <tbody id="history-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
