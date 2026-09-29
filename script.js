@@ -13,6 +13,10 @@ let activeOutflowContext = null;
 
 let undoStack = [];
 const maxHistory = 30;
+const arreglo = [
+  'canvas',
+  'interactive-layer'
+]
 
 const svg = document.getElementById('canvas');
 const interactiveLayer = document.getElementById('interactive-layer');
