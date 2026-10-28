@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Superficies */
+  --fondo: #0b1220;
+  --superficie: #111a2e;
+  --superficie-2: #17223a;
+  --borde: #22304d;
+  --texto: #e6ebf5;
+  --texto-suave: #8a97b3;
+
+  /* Acento único */
+  --acento: #3b82f6;
+  --acento-suave: rgba(59, 130, 246, .14);
+
+  /* Estados */
+  --exito: #22c55e;
+  --peligro: #ef4444;
+
+  /* Señalización ISO 7010 (solo para señales) */
+  --ssa-prohibicion: #d32f2f;
+  --ssa-advertencia: #f5b700;
+  --ssa-segura: #1e9e57;
+  --ssa-obligacion: #1565c0;
+
+  --radio: 10px;
+  --sombra: 0 4px 20px rgba(0, 0, 0, .35);
+  --transicion: 150ms ease;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }

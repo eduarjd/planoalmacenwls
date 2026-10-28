@@ -1,0 +1,109 @@
+.barra {
+  grid-area: barra;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borde);
+}
+
+.marca { display: flex; align-items: center; gap: 10px; min-width: 220px; }
+.logo {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border-radius: 8px;
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+.nombre { font-weight: 600; font-size: 15px; }
+
+.busqueda {
+  flex: 1;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 10px;
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+.busqueda:focus-within {
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px var(--acento-suave);
+}
+.iconoBusqueda { color: var(--texto-suave); flex-shrink: 0; }
+.busqueda input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--texto);
+  font: inherit;
+  font-size: 13px;
+}
+.busqueda input::placeholder { color: var(--texto-suave); }
+.busqueda kbd {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--superficie-2);
+  color: var(--texto-suave);
+  font-size: 11px;
+  font-family: inherit;
+}
+
+.acciones { display: flex; align-items: center; gap: 6px; }
+
+.icono {
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--texto-suave);
+  cursor: pointer;
+  transition: background var(--transicion), color var(--transicion);
+}
+.icono:hover:not(:disabled) { background: var(--superficie-2); color: var(--texto); }
+.icono:disabled { opacity: .35; cursor: not-allowed; }
+
+.divisor { width: 1px; height: 22px; background: var(--borde); margin: 0 4px; }
+
+.primario {
+  display: flex; align-items: center; gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--acento);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter var(--transicion);
+}
+.primario:hover { filter: brightness(1.1); }
+
+.estado {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.guardado  { color: var(--exito);  background: rgba(34, 197, 94, .1); }
+.guardando { color: var(--texto-suave); background: var(--superficie-2); }
+.error     { color: var(--peligro); background: rgba(239, 68, 68, .1); }
+
+.girar { animation: girar 1s linear infinite; }
+@keyframes girar { to { transform: rotate(360deg); } }
+
+@media (max-width: 900px) {
+  .nombre, .busqueda kbd { display: none; }
+  .marca { min-width: auto; }
+}
