@@ -3,7 +3,7 @@ import {
   Warehouse, Search, Undo2, Redo2, History, Download,
   Check, Loader2, AlertTriangle,
 } from 'lucide-react';
-import s from './Toolbar.module.css';
+import s from './toolbar.module.css';
 
 function tiempoRelativo(fecha) {
   if (!fecha) return '';
