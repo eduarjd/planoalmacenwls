@@ -5,6 +5,7 @@ import viteLogo from './assets/vite.svg'
 import './App.css'
 import  RielHerramientas from '../components/rielherramientas/Rielherramientas.jsx'
 import Toolbar  from '../components/toolbar/toolbar.jsx'
+import Lienzo from '../components/lienzo/lienzo.jsx'
  
 export default function App() {
 
@@ -27,7 +28,8 @@ export default function App() {
     
     />
     <RielHerramientas activa={herramienta} OnSeleccionar={setHerramienta}/>
-    <main className='lienzo'></main>
+
+    <Lienzo />
     <aside className='panel'></aside>
     </div>
   )
