@@ -28,7 +28,6 @@ export default function App() {
     
     />
     <RielHerramientas activa={herramienta} OnSeleccionar={setHerramienta}/>
-
     <Lienzo />
     <aside className='panel'></aside>
     </div>

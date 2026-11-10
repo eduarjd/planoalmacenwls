@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Rect, Line, Group, Text, Transformer } from 'react-konva';
 import { usePlano, PLANO } from '../../src/store/usePlano';
 import s from './Lienzo.module.css';
+import Estante from './estante.jsx';
 const MARGEN = 40 
 const AJUSTE = 0.05 /*Ajuste de los  objetos*/
 const ajustar = v => Math.round(v/AJUSTE)
@@ -11,7 +12,7 @@ export default function Lienzo(){
   const contenedor = useRef(null);
   const trRef = useRef(null);
   const nodos = useRef({});
-  const [tam, setTam] = useState({ w: 800, h: 500 });
+  const [tam, setTam] = useState({ w: 1600, h: 1000 });
   const [zoom, setZoom] = useState(1);
 
     const {objetos, seleccionado, seleccionar, actualizar } = usePlano();
@@ -97,11 +98,12 @@ export default function Lienzo(){
                 n.scale({ x: 1, y: 1 });
               }}
             >
-              <Rect width={m(o.ancho)} height={m(o.alto)} fill={o.color}
-                    cornerRadius={3} stroke="#0f172a" strokeWidth={1} opacity={0.9} />
-              <Text text={o.codigo} width={m(o.ancho)} height={m(o.alto)}
-                    align="center" verticalAlign="middle"
-                    fontSize={11} fontStyle="bold" fill="#fff" listening={false} />
+              {o.tipo === 'estante' ? (
+                <Estante objeto={o} m={m} />
+              ) : (
+                <Rect width={m(o.ancho)} height={m(o.alto)} fill="#cbd5e1"
+                      stroke="#0f172a" strokeWidth={1} />
+              )}
             </Group>
           ))}
 

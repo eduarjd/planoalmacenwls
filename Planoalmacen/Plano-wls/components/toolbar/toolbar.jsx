@@ -4,6 +4,7 @@ import {
   Check, Loader2, AlertTriangle,
 } from 'lucide-react';
 import s from './toolbar.module.css';
+import Busqueda from './busqueda.jsx';
 
 function tiempoRelativo(fecha) {
   if (!fecha) return '';
@@ -46,8 +47,6 @@ function IndicadorGuardado({ estado, ultimoGuardado }) {
 
 export default function Toolbar({
   nombrePlano = 'Plano Almacén WLS',
-  busqueda,
-  onBuscar,
   puedeDeshacer,
   puedeRehacer,
   onDeshacer,
@@ -78,17 +77,7 @@ export default function Toolbar({
         <span className={s.nombre}>{nombrePlano}</span>
       </div>
 
-      <label className={s.busqueda}>
-        <Search size={16} className={s.iconoBusqueda} />
-        <input
-          ref={inputRef}
-          type="search"
-          placeholder="Buscar estante, artículo, código o área…"
-          value={busqueda}
-          onChange={e => onBuscar(e.target.value)}
-        />
-        <kbd>Ctrl K</kbd>
-      </label>
+      <Busqueda  />
 
       <div className={s.acciones}>
         <button className={s.icono} onClick={onDeshacer}
